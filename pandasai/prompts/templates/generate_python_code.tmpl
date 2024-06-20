@@ -10,6 +10,12 @@ Update this initial code:
 ```python
 # TODO: import the required dependencies
 import pandas as pd
+{% if viz_lib %}
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+mpl.rcParams['font.family'] = 'Noto Sans CJK JP'
+plt.rcParams['axes.unicode_minus'] = False
+{% endif %}
 
 # Write code here
 
@@ -23,7 +29,7 @@ Variable `dfs: list[pd.DataFrame]` is already declared.
 
 At the end, declare "result" variable as a dictionary of type and value.
 {% if viz_lib %}
-If you are asked to plot a chart, use "{{viz_lib}}" for charts, save as png.
+If you need to plot a chart, please use "{{viz_lib}}" to draw, and the content of the chart should be in Chinese, saved as a png format.
 {% endif %}
 
 Generate python code and return full updated code:

@@ -1,13 +1,13 @@
-The previous conversation we had
+今天是 {{date}}
 
-<Conversation>
+### 会话
 {{context.memory.get_conversation()}}
-</Conversation>
 
-Based on the last conversation you generated the following code:
-
-<Code>
+### 生成的代码
 {{code}}
-</Code>
 
-Explain how you came up with code for non-technical people without mentioning technical details or mentioning the libraries used?
+逐步解释并在最后回答：
+1.解释代码的功能
+2.解释用户查询的要求
+3.严格比较查询与生成的代码
+如果完全符合要求则始终返回<Yes>，否则返回<No>

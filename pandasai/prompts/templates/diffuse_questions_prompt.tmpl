@@ -1,0 +1,19 @@
+{% for df in context.dfs %}
+{% set index = loop.index %}
+{% include 'shared/dataframe.tmpl' with context %}
+{% endfor %}
+
+<conversation>
+{{context.memory.get_conversation()}}
+</conversation>
+
+根据数据和用户的问题，找出可能会引起兴趣的扩散问题？
+- 只询问与数据和用户问题相关的问题，这些问题可能会引起兴趣。
+- 最多返回 3 个问题。
+- 以查询语言回复。
+
+例如：
+['问题 1', '问题 2']
+
+返回一个潜在感兴趣问题的 JSON 列表字符串。
+

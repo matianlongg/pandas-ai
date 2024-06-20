@@ -30,6 +30,7 @@ from ..schemas.df_config import Config
 from ..skills import Skill
 from .callbacks import Callbacks
 
+import datetime
 
 class BaseAgent:
     """
@@ -403,9 +404,12 @@ class BaseAgent:
         Returns the explanation of the code how it reached to the solution
         """
         try:
+            now = datetime.datetime.now()
+            human_readable_datetime = now.strftime("%A, %B %d, %Y %I:%M %p")
             prompt = ExplainPrompt(
                 context=self.context,
                 code=self.last_code_executed,
+                date=human_readable_datetime,
             )
             response = self.call_llm_with_prompt(prompt)
             self.logger.log(
