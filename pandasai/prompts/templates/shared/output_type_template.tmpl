@@ -1,11 +1,13 @@
 {% if not output_type %}
-type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+Type (possible values: "string", "number", "dataframe", "plot", "list", "all"). Example: { "type": "string", "value": "最高工资是 100,000。" } 或 { "type": "number", "value": 125 } 或 { "type": "dataframe", "value": pd.DataFrame({...}) } 或 { "type": "plot", "value": "temp_chart.png" } 或 { "type": "list", "value": ["项目A", "项目B", "项目C"] } 或 { "type": "all", "value": { "示例键": { "type": "number", "value": 125 } } }
 {% elif output_type == "number" %}
-type (must be "number"), value must int. Example: { "type": "number", "value": 125 }
+Type (must be "number"), the value must be an integer. Example: { "type": "number", "value": 125 }
 {% elif output_type == "string" %}
-type (must be "string"), value must be string. Example: { "type": "string", "value": f"The highest salary is {highest_salary}." }
+Type (must be "string"), the value must be a string. Example: { "type": "string", "value": "The highest salary is 100,000." }
 {% elif output_type == "dataframe" %}
-type (must be "dataframe"), value must be pd.DataFrame or pd.Series. Example: { "type": "dataframe", "value": pd.DataFrame({...}) }
+Type (must be "dataframe"), the value must be pd.DataFrame or pd.Series. Example: { "type": "dataframe", "value": pd.DataFrame({...}) }
 {% elif output_type == "plot" %}
-type (must be "plot"), value must be string. Example: { "type": "plot", "value": "temp_chart.png" }
+Type (must be "plot"), the value must be a string. Example: { "type": "plot", "value": "temp_chart.png" }
+{% elif output_type == "all" %}
+Type (must be "all"), the value must be a dictionary containing multiple types. Example: { "type": "all", "value": { "六月项目数量": { "type": "number", "value": 5 }, "项目名称": { "type": "list", "value": ["项目A", "项目B", "项目C"] }, "回款详情": { "type": "dataframe", "value": pd.DataFrame({...}) }, "逾期任务": { "type": "dataframe", "value": "type": "dataframe", "value": pd.DataFrame({...}) }, "回款图表": { "type": "plot", "value": "payment_chart.png" } } }
 {% endif %}

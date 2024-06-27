@@ -87,10 +87,10 @@ class OutputValidator:
             if "plotly" in repr(type(result["value"])):
                 return True
 
-            if not isinstance(result["value"], (str, dict)):
+            if not isinstance(result["value"], (str, dict, list)):
                 return False
 
-            if isinstance(result["value"], dict) or (
+            if isinstance(result["value"], dict) or isinstance(result["value"], list) or (
                 isinstance(result["value"], str)
                 and "data:image/png;base64" in result["value"]
             ):
@@ -98,3 +98,12 @@ class OutputValidator:
 
             path_to_plot_pattern = r"^(\/[\w.-]+)+(/[\w.-]+)*$|^[^\s/]+(/[\w.-]+)*$"
             return bool(re.match(path_to_plot_pattern, result["value"]))
+        elif result["type"] == "list":
+            return isinstance(result["value"], list)
+        elif result["type"] == "all":
+            if not isinstance(result["value"], dict):
+                return False
+            for key, sub_result in result["value"].items():
+                if not OutputValidator.validate_result(sub_result):
+                    return False
+            return True

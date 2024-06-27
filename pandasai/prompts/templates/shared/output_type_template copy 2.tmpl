@@ -1,0 +1,15 @@
+{% if not output_type %}
+type (possible values "string", "number", "dataframe", "plot", "list", "all"). Examples: { "type": "string", "value": "The highest salary is 100,000." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({ 'Column1': [1, 2, 3], 'Column2': ['A', 'B', 'C'] }) } or { "type": "plot", "value": "temp_chart.png" } or { "type": "list", "value": ["Project A", "Project B", "Project C"] } or { "type": "all", "value": { "example_key": { "type": "number", "value": 125 } } }
+{% elif output_type == "number" %}
+type (must be "number"), value must be int. Example: { "type": "number", "value": 125 }
+{% elif output_type == "string" %}
+type (must be "string"), value must be string. Example: { "type": "string", "value": "The highest salary is 100,000." }
+{% elif output_type == "dataframe" %}
+type (must be "dataframe"), value must be pd.DataFrame or pd.Series. Example: { "type": "dataframe", "value": pd.DataFrame({ 'Column1': [1, 2, 3], 'Column2': ['A', 'B', 'C'] }) }
+{% elif output_type == "plot" %}
+type (must be "plot"), value must be string. Example: { "type": "plot", "value": "temp_chart.png" }
+{% elif output_type == "list" %}
+type (must be "list"), value must be list. Example: { "type": "list", "value": ["Project A", "Project B", "Project C"] }
+{% elif output_type == "all" %}
+type (must be "all"), value must be a dictionary with multiple types. Example: { "type": "all", "value": { "Number of Projects in June": { "type": "number", "value": 5 }, "Project Names": { "type": "list", "value": ["Project A", "Project B", "Project C"] }, "Payment Details": { "type": "dataframe", "value": pd.DataFrame({ 'Project': ["Project A", "Project B"], 'Planned Payment': [10000, 15000], 'Actual Payment': [8000, 12000] }) }, "Overdue Tasks": { "type": "dataframe", "value": pd.DataFrame({ 'Task': ["Task 1", "Task 2"], 'Days Overdue': [5, 10], 'Impact': [5000, 8000] }) }, "Payment Chart": { "type": "plot", "value": "payment_chart.png" } } }
+{% endif %}

@@ -168,12 +168,17 @@ class CodeExecution(BaseLogicUnit):
                 environment[skill_func_name] = skill
 
         # Execute the code
+        print(code)
         exec(code, environment)
 
         # Get the result
         if "result" not in environment:
             raise NoResultFoundError("No result returned")
-
+        if "type" not in environment["result"]:
+            environment["result"] = {
+                "type": "all",
+                "value": environment["result"]
+            }
         return environment["result"]
 
     def _required_dfs(self, code: str) -> List[str]:

@@ -426,10 +426,14 @@ class BaseAgent:
 
     def rephrase_query(self, query: str):
         try:
+            now = datetime.datetime.now()
+            human_readable_datetime = now.strftime("%A, %B %d, %Y %I:%M %p")
             prompt = RephraseQueryPrompt(
                 context=self.context,
                 query=query,
+                date=human_readable_datetime,
             )
+            print(prompt.to_string())
             response = self.call_llm_with_prompt(prompt)
             self.logger.log(
                 f"""Rephrased Response:  {response}
